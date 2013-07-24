@@ -12,6 +12,11 @@ Block.prototype.add = function (block2) {
   return new Block(that.x + block2.x, that.y + block2.y);
 };
 
+Block.prototype.copy = function () {
+  var that = this;
+  return new Block(that.x, that.y);
+};
+
 Block.prototype.left = function () {
   var tmpY = this.y;
   if (this.y === 0) {
@@ -67,7 +72,7 @@ Snake.prototype.move = function () {
 };
 
 Snake.prototype.turn = function(direction) {
-  this.oldDir = this.facDir;
+  this.oldDir = this.facDir.copy();
   if (direction == "left") {
     this.facDir.left();
   } else {
@@ -91,13 +96,32 @@ Game.prototype.step = function () {
   this.snake.move();
 };
 
+Game.prototype.turn = function(direction) {
+  this.snake.turn(direction);
+};
+
 // Game.prototype.turn = function () {
 //   this.snake
 // }
 
-var g = new Game(100,100);
+var g = new Game(20,20);
 var s = g.snake;
+console.log("initial");
 console.log(s.body);
+
+g.turn("right");
 g.step();
+
+// console.log(s.facDir);
+// console.log(s.oldDir);
+
+console.log("second");
+console.log(s.body);
+
 g.step();
+console.log("third");
+console.log(s.body);
+
+g.step();
+console.log("fourth");
 console.log(s.body);
