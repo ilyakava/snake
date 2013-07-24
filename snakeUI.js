@@ -50,7 +50,6 @@ $(document).ready(function() {
       right();
     }
   });
-  
 
   var update = function() {
     clearBoard();
