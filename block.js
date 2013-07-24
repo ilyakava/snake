@@ -108,9 +108,10 @@ Game.prototype.over = function() {
   var that = this;
   var head = US.first(that.snake.body);
   var body = US.rest(that.snake.body);
+  
   if (head.x < 0 || head.y < 0 || head.x > that.board.x || head.y > that.board.y) {
     return true;
-  } else if (US.contains(body, head)) {
+  } else if (US.any(body, function(block) { return (block.x === head.x) && (block.y === head.y); })) {
     return true;
   }
   return false;
