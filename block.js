@@ -26,6 +26,11 @@ Snake.spawn = function (xCenter, yCenter) {
   return initSnake;
 };
 
+Snake.prototype.move = function () {
+  var that = this;
+  this.body = US.map(that.body, function(unit) { return unit.add(that.orientation); });
+};
+
 var Board = function (xBoard, yBoard) {
   this.x = xBoard;
   this.y = yBoard;
@@ -37,5 +42,17 @@ var Game = function (xBoard, yBoard) {
   this.snake = Snake.spawn(center.x, center.y);
 };
 
+Game.prototype.step = function () {
+  this.snake.move();
+};
 
-Game.spawnSnake
+// Game.prototype.turn = function () {
+//   this.snake
+// }
+
+var g = new Game(100,100);
+var s = g.snake;
+console.log(s.body);
+g.step();
+g.step();
+console.log(s.body);
