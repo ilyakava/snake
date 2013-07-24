@@ -6,6 +6,7 @@ var Block = function (xCoord, yCoord) {
   this.y = yCoord;
 };
 
+
 Block.prototype.add = function (block2) {
   var that = this;
   return new Block(that.x + block2.x, that.y + block2.y);
@@ -46,8 +47,8 @@ Block.prototype.right = function () {
 var Snake = function () {
   this.facDir = new Block(-1, 0);
   this.body = [];
-  this.oldDir = null;
-  this.apex = NaN;
+  // this.oldDir = null;
+  // this.apex = NaN;
 };
 
 Snake.spawn = function (xCenter, yCenter) {
@@ -86,23 +87,37 @@ var Board = function (xBoard, yBoard) {
   this.y = yBoard;
 };
 
-var Apple = function (xCoord, yCoord) {
-  this.x = xCoord;
-  this.y = yCoord;
-};
+// var Apple = function (xCoord, yCoord) {
+//   this.x = xCoord;
+//   this.y = yCoord;
+// };
 
 var Game = function (xBoard, yBoard) {
   this.board = new Board(xBoard, yBoard);
   var center = { x:(this.board.x / 2), y:(this.board.y / 2) };
   this.snake = Snake.spawn(center.x, center.y);
-  this.apple = this.randomApple();
+  
+  var board = this.board;
+  this.apple = new Block(
+    Math.floor((Math.random() * board.x)),
+    Math.floor((Math.random() * board.y))
+  );
 };
 
-Game.prototype.randomApple = function () {
+
+// Game.prototype.randomApple = function () {
+//   var that = this;
+//   return new Apple(
+//     Math.floor((Math.random() * that.board.x + 1)),
+//     Math.floor((Math.random() * that.board.y + 1))
+//   );
+// };
+
+Game.randomBlock = function () {
   var that = this;
-  return new Apple(
-    Math.floor((Math.random() * that.board.x + 1)),
-    Math.floor((Math.random() * that.board.y + 1))
+  return new Block(
+    Math.floor((Math.random() * that.board.x)),
+    Math.floor((Math.random() * that.board.y))
   );
 };
 
@@ -116,11 +131,18 @@ Game.prototype.turn = function(direction) {
 };
 
 Game.prototype.grow = function() {
-  var body = this.snake.body;
+  var that = this;
+  var head = US.first(that.snake.body);
   var apple = this.apple;
-  if (US.any(body, function(block) {return (block.x === apple.x) && (block.y === apple.y);})) {
+
+  console.log("snake head x",head.x, "apple x", apple.x, "snake head y", head.y, "apple y", apple.y);
+
+  if ((head.x === apple.x) && (head.y === apple.y)) {
     this.snake.grow();
-    this.apple = this.randomApple();
+    this.apple = new Block(
+      Math.floor((Math.random() * that.board.x)),
+      Math.floor((Math.random() * that.board.y))
+    );
   }
 };
 

@@ -20,13 +20,13 @@ $(document).ready(function() {
   var addSnake = function() {
     US.each(game.snake.body, function(block) {
       var idStr = "#x" + block.x + "y" + block.y;
-      console.log(game.snake.body);
       $(idStr).addClass('full');
     });
   };
 
   var addApple = function() {
-    var idStr = "#x" + game.apple.x + "y" + game.apple.x;
+    var idStr = "#x" + game.apple.x + "y" + game.apple.y;
+    console.log(idStr);
     $(idStr).addClass('apple');
   };
 
@@ -50,6 +50,7 @@ $(document).ready(function() {
       right();
     }
   });
+  
 
   var update = function() {
     clearBoard();
@@ -57,10 +58,11 @@ $(document).ready(function() {
     addApple();
     game.step();
     if (game.over()) {
-      game = new Game(xBoard, yBoard);
+      clearInterval(interval);
+      // game = new Game(xBoard, yBoard);
     }
   };
 
-  window.setInterval(update, 150);
+  var interval = window.setInterval(update, 100);
 
 });
