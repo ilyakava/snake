@@ -1,0 +1,13 @@
+.empty{
+	background-color:#38A5A8;
+}
+
+.full{
+	background-color:#411621;
+}
+
+table{
+	width:700px;
+	height:700px;
+	/*border-collapse:collapse;*/
+}

@@ -1,6 +1,5 @@
 "use strict";
-
-var US = require('./underscore.js');
+var US = _;
 
 var Block = function (xCoord, yCoord) {
   this.x = xCoord;
@@ -10,6 +9,11 @@ var Block = function (xCoord, yCoord) {
 Block.prototype.add = function (block2) {
   var that = this;
   return new Block(that.x + block2.x, that.y + block2.y);
+};
+
+Block.prototype.subtract = function (block2) {
+  var that = this;
+  return new Block(that.x - block2.x, that.y - block2.y);
 };
 
 Block.prototype.copy = function () {
@@ -49,7 +53,7 @@ var Snake = function () {
 Snake.spawn = function (xCenter, yCenter) {
   var initSnake = new Snake();
 
-  US.times(3, function(i) {
+  US.times(13, function(i) {
     initSnake.body.push(new Block(xCenter + i, yCenter));
   });
   return initSnake;
@@ -81,6 +85,11 @@ Snake.prototype.turn = function(direction) {
   this.apex = 1;
 };
 
+Snake.prototype.grow = function() {
+  var that = this;
+  this.body.push(US.last(that.body).copy().subtract(that.oldDir));
+};
+
 var Board = function (xBoard, yBoard) {
   this.x = xBoard;
   this.y = yBoard;
@@ -100,28 +109,52 @@ Game.prototype.turn = function(direction) {
   this.snake.turn(direction);
 };
 
-// Game.prototype.turn = function () {
-//   this.snake
-// }
+Game.prototype.grow = function() {
+  this.snake.grow();
+};
 
-var g = new Game(20,20);
-var s = g.snake;
-console.log("initial");
-console.log(s.body);
+Game.prototype.over = function() {
+  var that = this;
+  var head = US.first(that.snake.body);
+  var body = US.rest(that.snake.body);
+  if (head.x < 0 || head.y < 0 || head.x > that.board.x || head.y > that.board.y) {
+    return true;
+  } else if (US.contains(body, head)) {
+    return true;
+  }
+  return false;
+};
 
-g.turn("right");
-g.step();
+
+// var g = new Game(20,20);
+// var s = g.snake;
+// console.log("initial");
+// console.log(s.body);
+
+// g.turn("right");
+// g.step();
 
 // console.log(s.facDir);
 // console.log(s.oldDir);
 
-console.log("second");
-console.log(s.body);
+// g.grow();
+// console.log("second");
+// console.log(s.body);
 
-g.step();
-console.log("third");
-console.log(s.body);
 
-g.step();
-console.log("fourth");
-console.log(s.body);
+// g.step();
+// console.log("third");
+// console.log(s.body);
+
+// g.turn("left");
+// g.step();
+// console.log("first after left");
+// console.log(s.body);
+
+// g.step();
+// console.log("second after left");
+// console.log(s.body);
+
+// g.step();
+// console.log("third after left");
+// console.log(s.body);
