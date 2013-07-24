@@ -53,7 +53,7 @@ var Snake = function () {
 Snake.spawn = function (xCenter, yCenter) {
   var initSnake = new Snake();
 
-  US.times(23, function(i) {
+  US.times(3, function(i) {
     initSnake.body.push(new Block(xCenter + i, yCenter));
   });
   return initSnake;
@@ -86,13 +86,28 @@ var Board = function (xBoard, yBoard) {
   this.y = yBoard;
 };
 
+var Apple = function (xCoord, yCoord) {
+  this.x = xCoord;
+  this.y = yCoord;
+};
+
 var Game = function (xBoard, yBoard) {
   this.board = new Board(xBoard, yBoard);
   var center = { x:(this.board.x / 2), y:(this.board.y / 2) };
   this.snake = Snake.spawn(center.x, center.y);
+  this.apple = this.randomApple();
+};
+
+Game.prototype.randomApple = function () {
+  var that = this;
+  return new Apple(
+    Math.floor((Math.random() * that.board.x + 1)),
+    Math.floor((Math.random() * that.board.y + 1))
+  );
 };
 
 Game.prototype.step = function () {
+  this.grow();
   this.snake.move();
 };
 
@@ -101,7 +116,12 @@ Game.prototype.turn = function(direction) {
 };
 
 Game.prototype.grow = function() {
-  this.snake.grow();
+  var body = this.snake.body;
+  var apple = this.apple;
+  if (US.any(body, function(block) {return (block.x === apple.x) && (block.y === apple.y);})) {
+    this.snake.grow();
+    this.apple = this.randomApple();
+  }
 };
 
 Game.prototype.over = function() {
@@ -109,12 +129,11 @@ Game.prototype.over = function() {
   var head = US.first(that.snake.body);
   var body = US.rest(that.snake.body);
   
-  if (head.x < 0 || head.y < 0 || head.x > that.board.x || head.y > that.board.y) {
-    return true;
-  } else if (US.any(body, function(block) { return (block.x === head.x) && (block.y === head.y); })) {
-    return true;
-  }
-  return false;
+  return (
+    head.x < 0 || head.y < 0 ||
+    head.x > that.board.x || head.y > that.board.y ||
+    US.any(body, function(block) { return (block.x === head.x) && (block.y === head.y); })
+  );
 };
 
 
