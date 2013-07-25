@@ -1,17 +1,38 @@
-.empty{
-	background-color:#38A5A8;
+.bg {
+	background-color: #122336;
+}
+
+.score {
+	color: #85B03B;
+	font-family: "helvetica", "sans-serif";
+}
+
+
+.empty {
+	background-color: #6AA4CD;
+	-webkit-box-shadow: 0 0 22px #122336;
+	opacity: 0.9;
+	/*background-color: #749a02; -webkit-box-shadow: 0 0 9px #333;*/
 }
 
 .full{
-	background-color:#411621;
+	background-color:#85B03B;
+	opacity: 0.9;
 }
 
 table{
 	width:600px;
 	height:600px;
-	/*border-collapse:collapse;*/
+	border-collapse:collapse;
 }
 
 .apple{
-	background-color:#CD9C6A;
+	background-color:#DA4473;
 }
+
+/*@-webkit-keyframes greenPulse {
+from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
+to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+}*/
+

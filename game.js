@@ -5,11 +5,12 @@ var Game = function (xBoard, yBoard) {
   this.board = new Block(xBoard, yBoard);
   var center = { x:(this.board.x / 2), y:(this.board.y / 2) };
   this.snake = Snake.spawn(center.x, center.y);
+  this.score = 0;
   var that = this;
 
   this.apple = new Block(
-    Math.floor((Math.random() * that.board.x)),
-    Math.floor((Math.random() * that.board.y))
+    Math.floor(Math.random() * that.board.x),
+    Math.floor(Math.random() * that.board.y)
   );
 };
 
@@ -40,6 +41,8 @@ Game.prototype.checkGrowth = function() {
 
   if ((head.x === apple.x) && (head.y === apple.y)) {
     this.snake.grow();
+    this.score += 10;
+
     this.apple = new Block(
       Math.floor((Math.random() * that.board.x)),
       Math.floor((Math.random() * that.board.y))
