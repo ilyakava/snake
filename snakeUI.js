@@ -26,7 +26,6 @@ $(document).ready(function() {
 
   var addApple = function() {
     var idStr = "#x" + game.apple.x + "y" + game.apple.y;
-    console.log(idStr);
     $(idStr).addClass('apple');
   };
 
