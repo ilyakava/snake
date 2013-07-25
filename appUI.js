@@ -4,6 +4,7 @@ var US = _;
 $(document).ready(function() {
   var xBoard = 40;
   var yBoard = 40;
+  var speed = 100;
 
   var game = new Game(xBoard, yBoard);
   // Create the board
@@ -61,6 +62,6 @@ $(document).ready(function() {
     }
   };
 
-  var interval = window.setInterval(update, 100);
+  var interval = window.setInterval(update, speed);
 
 });
