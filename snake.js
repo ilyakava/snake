@@ -4,8 +4,6 @@ var US = _;
 var Snake = function () {
   this.facDir = new Block(-1, 0);
   this.body = [];
-  // this.oldDir = null;
-  // this.apex = NaN;
 };
 
 Snake.spawn = function (xCenter, yCenter) {
@@ -25,16 +23,29 @@ Snake.prototype.move = function () {
 };
 
 Snake.prototype.turn = function(direction) {
-  this.oldDir = this.facDir.copy();
-  if (direction == "left") {
-    this.facDir.left();
-  } else {
-    this.facDir.right();
-  }
-  this.apex = 1;
+  if (
+    direction == "west" &&
+    this.facDir.x === 0 &&
+    (this.facDir.y == -1 || this.facDir.y == 1)
+  ) { this.facDir.west(); }
+  else if (
+    direction == "north" &&
+    this.facDir.y === 0 &&
+    (this.facDir.x == -1 || this.facDir.x == 1)
+  ) { this.facDir.north(); }
+  else if (
+    direction == "east" &&
+    this.facDir.x === 0 &&
+    (this.facDir.y == -1 || this.facDir.y == 1)
+  ) { this.facDir.east(); }
+  else if (
+    direction == "south" &&
+    this.facDir.y === 0 &&
+    (this.facDir.x == -1 || this.facDir.x == 1)
+  ) { this.facDir.south(); }
 };
 
 Snake.prototype.grow = function() {
   var that = this;
-  this.body.push(US.last(that.body).copy().subtract(that.oldDir));
+  this.body.push(US.last(that.body).copy().subtract(that.facDir));
 };

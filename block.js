@@ -22,29 +22,25 @@ Block.prototype.copy = function () {
   return new Block(that.x, that.y);
 };
 
-Block.prototype.left = function () {
-  var tmpY = this.y;
-  if (this.y === 0) {
-    this.y = -this.x;
-    this.x = tmpY;
-  } else {
-    this.y = this.x;
-    this.x = tmpY;
-  }
+Block.prototype.west = function () {
+  this.x = -1;
+  this.y = 0;
 };
 
-Block.prototype.right = function () {
-  var tmpY = this.y;
-  if (this.x === 0) {
-    this.y = this.x;
-    this.x = -tmpY;
-  } else {
-    this.y = this.x;
-    this.x = tmpY;
-  }
+Block.prototype.north = function () {
+  this.x = 0;
+  this.y = -1;
 };
 
+Block.prototype.east = function () {
+  this.x = 1;
+  this.y = 0;
+};
 
+Block.prototype.south = function () {
+  this.x = 0;
+  this.y = 1;
+};
 
 // var g = new Game(20,20);
 // var s = g.snake;

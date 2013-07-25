@@ -35,23 +35,19 @@ $(document).ready(function() {
     $('.apple').removeClass('apple');
   };
 
-  var left = function() {
-    game.turn("left");
-  };
-
-  var right = function() {
-    game.turn("right");
-  };
-
   var updateScore = function() {
     $('.score').html('Score: ' + game.score);
   }
 
   $('html').keydown(function (e) {
     if (e.keyCode == 37) {
-      left();
+      game.turn("west");
     } else if (e.keyCode == 39) {
-      right();
+      game.turn("east");
+    } else if (e.keyCode == 38) {
+      game.turn("north");
+    } else if (e.keyCode == 40) {
+      game.turn("south");
     }
   });
 
