@@ -6,6 +6,7 @@ var Game = function (xBoard, yBoard) {
   var center = { x:(this.board.x / 2), y:(this.board.y / 2) };
   this.snake = Snake.spawn(center.x, center.y);
   this.score = 0;
+  this.paused = false;
 
   var snake = this.snake;
   this.randomApple = function () {

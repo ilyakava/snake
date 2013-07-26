@@ -6,7 +6,7 @@ $(document).ready(function() {
   var yBoard = 18;
   var speed = 100;
 
-  var game = new Game(xBoard, yBoard);
+  window.game = new Game(xBoard, yBoard);
   // Create the board
   US.times(yBoard, function(col) {
     var html = '<tr id="x' + col + '>';
@@ -48,6 +48,8 @@ $(document).ready(function() {
       game.turn("north");
     } else if (e.keyCode == 40) {
       game.turn("south");
+    } else if (e.keyCode == 80) {
+      game.paused = !game.paused;
     }
   });
 
@@ -55,7 +57,7 @@ $(document).ready(function() {
     clearBoard();
     addSnake();
     addApple();
-    game.step();
+    if (!game.paused) {game.step();}
     updateScore();
     if (game.over()) {
       // clearInterval(interval);
