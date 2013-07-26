@@ -11,13 +11,13 @@ var Game = function (xBoard, yBoard) {
   var snake = this.snake;
   this.randomApple = function () {
     var apple = new Block(
-    Math.floor((Math.random() * (xBoard - 1)) + 1),
-    Math.floor((Math.random() * (yBoard - 1)) + 1)
+      Math.floor((Math.random() * (xBoard - 1)) + 1),
+      Math.floor((Math.random() * (yBoard - 1)) + 1)
     );
     if (US.any(snake.body, function(block) {
       return (block.x === apple.x) && (block.y === apple.y);
     })) {
-      this.randomApple();
+      randomApple();
     } else {
       return apple;
     }
@@ -25,25 +25,6 @@ var Game = function (xBoard, yBoard) {
 
   this.apple = this.randomApple();
 };
-
-// Game.prototype.resetApple = function () {
-//   var that = this;
-//   var randomApple = function () {
-//     var apple = new Block(
-//     Math.floor(Math.random() * that.board.x),
-//     Math.floor(Math.random() * that.board.y)
-//     );
-//     if (US.any(that.snake.body, function(block) {
-//       return (block.x === apple.x) && (block.y === apple.y);
-//     })) {
-//       randomApple();
-//     } else {
-//       return apple;
-//     }
-//   };
-//   this.apple = randomApple();
-// };
-
 
 Game.prototype.step = function () {
   this.checkGrowth();
@@ -58,8 +39,6 @@ Game.prototype.checkGrowth = function() {
   var that = this;
   var head = US.first(that.snake.body);
   var apple = this.apple;
-
-  // console.log("snake head x",head.x, "apple x", apple.x, "snake head y", head.y, "apple y", apple.y);
 
   if ((head.x === apple.x) && (head.y === apple.y)) {
     this.snake.grow();
@@ -76,7 +55,7 @@ Game.prototype.over = function() {
   
   return (
     head.x < 0 || head.y < 0 ||
-    head.x > that.board.x || head.y > that.board.y ||
+    head.x > that.board.x - 1 || head.y > that.board.y - 1 ||
     US.any(body, function(block) { return (block.x === head.x) && (block.y === head.y); })
   );
 };

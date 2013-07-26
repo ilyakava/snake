@@ -4,7 +4,7 @@ var US = _;
 $(document).ready(function() {
   var xBoard = 18;
   var yBoard = 18;
-  var speed = 100;
+  var speed = 150;
 
   window.game = new Game(xBoard, yBoard);
   // Create the board
@@ -54,10 +54,10 @@ $(document).ready(function() {
   });
 
   var update = function() {
+    if (!game.paused) {game.step();}
     clearBoard();
     addSnake();
     addApple();
-    if (!game.paused) {game.step();}
     updateScore();
     if (game.over()) {
       // clearInterval(interval);
