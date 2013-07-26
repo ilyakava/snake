@@ -11,8 +11,8 @@ var Game = function (xBoard, yBoard) {
   var snake = this.snake;
   this.randomApple = function () {
     var apple = new Block(
-    Math.floor((Math.random() * xBoard) + 1),
-    Math.floor((Math.random() * yBoard) + 1)
+    Math.floor((Math.random() * (xBoard - 1)) + 1),
+    Math.floor((Math.random() * (yBoard - 1)) + 1)
     );
     if (US.any(snake.body, function(block) {
       return (block.x === apple.x) && (block.y === apple.y);
