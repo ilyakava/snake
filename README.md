@@ -1,7 +1,7 @@
 Snake
 ===
 * My implementation of the classic snake game in JavaScript
-
+![image](http://imgur.com/hkmwLI5.png)
 
 TODO
 =======
