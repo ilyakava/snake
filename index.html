@@ -28,21 +28,8 @@
 
 		<li>
 			<label>
-				<input type="text" value="40" class="dial-board-size" data-min="10" data-max"100">
+				<input type="text" value="40" class="dial" data-min="10" data-max"100">
 				Board Size
-			</label>
-		</li>
-
-		<li>
-			<!-- special, relies on board size for data max -->
-			<label>
-				<input
-					type="text"
-					value="3"
-					class="dial dial-snake-length"
-					data-min="3"
-					data-max"19">
-				Start Length
 			</label>
 		</li>
 	</ul>
@@ -50,25 +37,6 @@
 	<script>
 		$(function () {
 			$('.dial').knob();
-		});
-
-		$(function () {
-			$('.dial-board-size').knob({
-				'change':	function (boardSize) {
-					var maxSnakeSize = parseInt(boardSize / 2) - 1
-					$('.dial-snake-length').knob({
-						'min': 3,
-						'max': maxSnakeSize,
-						'change': function (userSnakeInput) {
-							console.log("changin");
-							if (userSnakeInput > maxSnakeSize) {
-								console.log("message");
-								this.val(maxSnakeSize);
-							}
-						}
-					})
-				}
-			});
 		});
 	</script>
 
