@@ -48,12 +48,13 @@ Game.prototype.checkGrowth = function() {
   }
 };
 
-Game.prototype.over = function() {
+Game.prototype.over = function(force) {
   var that = this;
   var head = US.first(that.snake.body);
   var body = US.rest(that.snake.body);
   
   return (
+    force ||
     head.x < 0 || head.y < 0 ||
     head.x > that.board.x - 1 || head.y > that.board.y - 1 ||
     US.any(body, function(block) { return (block.x === head.x) && (block.y === head.y); })

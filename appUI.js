@@ -2,21 +2,32 @@
 var US = _;
 
 $(document).ready(function() {
-  var xBoard = 18;
-  var yBoard = 18;
-  var speed = 150;
+  var xBoard = function () {
+    var userInput = parseInt((parseInt($('.dial.board-size').val())) / 2);
+    return userInput;
+  };
+  var yBoard = xBoard;
 
-  window.game = new Game(xBoard, yBoard);
+  var speed = function () {
+    var userInput = parseInt(8000 / (parseInt($('.dial.speed').val())));
+    return userInput;
+  };
+
+  window.game = new Game(xBoard(), yBoard());
+  
   // Create the board
-  US.times(yBoard, function(col) {
-    var html = '<tr id="x' + col + '>';
-    US.times(xBoard, function(row) {
-      html += ('<td id="x' + row + 'y' + col + '" class="empty"></td>');
-    });
-    html += '</tr>';
+  var createBoard = function () {
+    $('table').html("");
+    US.times(yBoard(), function(col) {
+      var html = '<tr id="x' + col + '>';
+      US.times(xBoard(), function(row) {
+        html += ('<td id="x' + row + 'y' + col + '" class="empty"></td>');
+      });
+      html += '</tr>';
 
-    $('table').append(html);
-  });
+      $('table').append(html);
+    });
+  };
 
   var addSnake = function() {
     US.each(game.snake.body, function(block) {
@@ -60,11 +71,15 @@ $(document).ready(function() {
     addApple();
     updateScore();
     if (game.over()) {
-      // clearInterval(interval);
-      game = new Game(xBoard, yBoard);
+      createBoard();
+      window.clearInterval(window.interval);
+      window.interval = window.setInterval(update, speed());
+      game = new Game(xBoard(), yBoard());
     }
   };
 
-  var interval = window.setInterval(update, speed);
+  // actually triggers the game
+  createBoard();
+  window.interval = window.setInterval(update, speed());
 
 });
