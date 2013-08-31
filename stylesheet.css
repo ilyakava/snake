@@ -21,6 +21,8 @@ body {
     clear:both;
 }
 
+/* Gameboard */
+
 div.game {
 	position: relative;
 	top: -140;
@@ -83,9 +85,7 @@ ul.navbar > li > label {
     margin: 8px 10px; 
 }
 
-ul.navbar > li > input {
-    
-}
+/* Some instructions at the bottom */
 
 div.game > p {
 	color: rgb(192,255,255);
