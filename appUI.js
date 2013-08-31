@@ -7,8 +7,16 @@ $(document).ready(function() {
   };
   var yBoard = xBoard;
 
+  window.game = new Game(xBoard(), yBoard());
+
   var speed = function () {
-    return parseInt(8000 / (parseInt($('.dial.speed').val())));
+    var speed = parseInt(8000 / (parseInt($('.dial.speed').val())));
+    window.startSpeed = speed;
+    return speed;
+  };
+
+  var speedUp = function () {
+    return (window.startSpeed - (3 * game.score / 10));
   };
   
   // Create the board
@@ -61,11 +69,15 @@ $(document).ready(function() {
   });
 
   var update = function() {
-    if (!game.paused) {game.step();}
+    if (!game.paused) { game.step(); }
     clearBoard();
     addSnake();
     addApple();
     updateScore();
+
+    window.clearInterval(window.interval);
+    window.interval = window.setInterval(update, speedUp());
+
     if (game.over()) {
       createBoard();
       window.clearInterval(window.interval);
@@ -74,8 +86,7 @@ $(document).ready(function() {
     }
   };
 
-  // actually triggers the game
-  window.game = new Game(xBoard(), yBoard());
+  // actually triggers the game the first time
   createBoard();
   window.interval = window.setInterval(update, speed());
 
