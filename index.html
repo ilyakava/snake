@@ -9,45 +9,65 @@
   <script src="game.js"></script>
   <script src="appUI.js"></script>
 </head>
-<body class="bg">
-	<ul class="navbar">
-		<li>
-			<label>
+<body>
+	<nav>
+		<ul class="navbar group">
+			<li>
+				<label>
+					Speed
+				</label>
 				<input type="text" value="50" class="dial" data-min="40" data-max"100">
-				Speed
-			</label>
-		</li>
+			</li>
 
 
-		<li>
-			<label>
+			<li>
+				<label>
+					Display Size
+				</label>
 				<input type="text" value="40" class="dial" data-min="10" data-max"100">
-				Display Size
-			</label>
-		</li>
+			</li>
 
-		<li>
-			<label>
+			<li>
+				<label>
+					Board Size
+				</label>
 				<input type="text" value="40" class="dial" data-min="10" data-max"100">
-				Board Size
-			</label>
-		</li>
-	</ul>
+			</li>
+		</ul>
+	</nav>
 
 	<script>
 		$(function () {
-			$('.dial').knob();
+			$('.dial').knob({
+				"width": "50",
+				"fgColor":"rgb(159,252,255)",
+				"bgColor":"rgb(51,51,51)",
+				"skin":"tron",
+				"thickness":".1",
+				"angleOffset":"180",
+				"font-size": "16px"
+			});
 		});
+
+		$(document).ready(function () {
+			$('input[type="text"].dial').
+				css('font-size', '16px').
+				css('font-weight', '100').
+				css('color', 'rgb(192,255,255)').
+				css("font-family", '"Helvetica Neue", Helvetica, Arial, sans-serif');
+		})
 	</script>
 
-	<h1 class="score">Score: </h1>
+	<div class="game">
+		<h1 class="score">Score: </h1>
 
-	<table>
-	</table>
+		<table>
+		</table>
 
-	<p>
-		Press "P" to pause and unpause.
-	</p>
+		<p>
+			Press "P" to pause and unpause.
+		</p>
+	</div>
 
 </body>
 </html>

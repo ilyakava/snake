@@ -1,38 +1,94 @@
-.bg {
-	background-color: #122336;
+/* reset */
+ul, li, label, body, table, h1, p, input {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    outline-color: rgb(34,34,34);
+    letter-spacing: 1;
 }
 
-.score {
-	color: #85B03B;
-	font-family: "helvetica", "sans-serif";
+body {
+	background-color: rgb(34,34,34);
+	height: 100%;
 }
 
+/* utilities */
+.group {
+    display:table;
+    content:"";
+    clear:both;
+}
+
+div.game {
+	position: relative;
+	top: -140;
+}
+
+h1.score {
+	color: rgb(192,255,255);
+	text-align: center;
+    clear: both;
+}
 
 .empty {
-	background-color: #6AA4CD;
-	-webkit-box-shadow: 0 0 22px #122336;
-	opacity: 0.9;
-	/*background-color: #749a02; -webkit-box-shadow: 0 0 9px #333;*/
+	background-color: rgb(51,51,51);
+	border: 1px solid rgb(70,70,70);
 }
 
 .full{
-	background-color:#85B03B;
-	opacity: 0.9;
+    background-color: rgb(151,204,237); -webkit-box-shadow: 0 0 18px rgb(204,254,255);
 }
 
 table{
 	width:600px;
 	height:600px;
-	border-collapse:collapse;
+	margin: 10px auto;
 }
 
 .apple{
-	background-color:#DA4473;
+	-webkit-animation:greenPulse .65s infinite;
 }
 
-/*@-webkit-keyframes greenPulse {
+@-webkit-keyframes greenPulse {
 from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
 50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
 to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-}*/
+}
 
+/* navbar with dials */
+nav {
+	position: relative;
+}
+
+
+ul.navbar {
+    margin: auto;
+}
+
+ul.navbar > li {
+    float: left;
+    margin-left: 35px;
+}
+
+ul.navbar > li:first-child {
+    margin-left: 0;
+}
+
+ul.navbar > li > label {
+    color: rgb(192,255,255);
+    font-size: 25px;
+    float: left;
+    margin: 8px 10px; 
+}
+
+ul.navbar > li > input {
+    
+}
+
+div.game > p {
+	color: rgb(192,255,255);
+	text-align: center;
+	font-size: 17px;
+}
