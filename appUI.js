@@ -3,17 +3,13 @@ var US = _;
 
 $(document).ready(function() {
   var xBoard = function () {
-    var userInput = parseInt((parseInt($('.dial.board-size').val())) / 2);
-    return userInput;
+    return parseInt((parseInt($('.dial.board-size').val())) / 2);
   };
   var yBoard = xBoard;
 
   var speed = function () {
-    var userInput = parseInt(8000 / (parseInt($('.dial.speed').val())));
-    return userInput;
+    return parseInt(8000 / (parseInt($('.dial.speed').val())));
   };
-
-  window.game = new Game(xBoard(), yBoard());
   
   // Create the board
   var createBoard = function () {
@@ -79,6 +75,7 @@ $(document).ready(function() {
   };
 
   // actually triggers the game
+  window.game = new Game(xBoard(), yBoard());
   createBoard();
   window.interval = window.setInterval(update, speed());
 
