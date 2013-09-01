@@ -21,22 +21,30 @@ Block.prototype.copy = function () {
   return new Block(that.x, that.y);
 };
 
+Block.prototype.equal = function (block) {
+  return !!(this.x == block.x && this.y == block.y);
+};
+
 Block.prototype.west = function () {
   this.x = -1;
   this.y = 0;
+  return this;
 };
 
 Block.prototype.north = function () {
   this.x = 0;
   this.y = -1;
+  return this;
 };
 
 Block.prototype.east = function () {
   this.x = 1;
   this.y = 0;
+  return this;
 };
 
 Block.prototype.south = function () {
   this.x = 0;
   this.y = 1;
+  return this;
 };
