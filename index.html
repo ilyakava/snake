@@ -11,35 +11,34 @@
 	</head>
 
 	<body>
-		<nav>
-			<ul class="navbar group">
-				<li>
-					<label>
-						Starting Speed
-					</label>
-					<input type="text" value="50" class="dial speed" data-min="40" data-max"100">
-				</li>
+		<nav class="group">
+			<div class="score-container">
+				<h1 class="score">Score: </h1>
+			</div>
+			
+			<div class="dials-container">
+				<ul class="navbar group">
+					<li>
+						<label>
+							Starting Speed
+						</label>
+						<input type="text" value="50" class="dial speed" data-min="40" data-max"100">
+					</li>
 
-	<!-- 			<li>
-					<label>
-						Display Size
-					</label>
-					<input type="text" value="40" class="dial" data-min="10" data-max"100">
-				</li> -->
-
-				<li>
-					<label>
-						Board Size
-					</label>
-					<input
-						type="text"
-						value="36"
-						class="dial board-size"
-						data-min="10"
-						data-max"100"
-						data-step="2">
-				</li>
-			</ul>
+					<li>
+						<label>
+							Board Size
+						</label>
+						<input
+							type="text"
+							value="36"
+							class="dial board-size"
+							data-min="10"
+							data-max"100"
+							data-step="2">
+					</li>
+				</ul>
+			</div>
 		</nav>
 
 		<script>
@@ -68,8 +67,6 @@
 		</script>
 
 		<div class="game">
-			<h1 class="score">Score: </h1>
-
 			<!-- Gameboard is the table -->
 			<table>
 			</table>
